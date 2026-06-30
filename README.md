@@ -1,8 +1,11 @@
 # Projeto Logística
 
-Projeto com dois módulos principais para análise e otimização logística:
-- **Previsão de Compra**: Análise de série temporal de vendas por categoria
-- **Roteirização**: Otimização de rotas de entrega usando algoritmos de roteamento
+Aplicativo de apoio à decisão logística:
+- **Previsão de Compra**: Análise de série temporal de vendas por categoria, com decisão de
+  reposição de estoque (previsão de demanda + EOQ + ROP + estoque de segurança estatístico)
+
+> 📚 **Documentação técnica e metodológica completa** (o que o módulo faz, todas as
+> decisões e suas justificativas): veja [`DOCUMENTACAO.md`](DOCUMENTACAO.md).
 
 ## 📋 Pré-requisitos
 
@@ -61,14 +64,14 @@ pip install -r requirements.txt
 Se encontrar problemas com o arquivo requirements.txt, você pode instalar as dependências principais manualmente:
 
 ```bash
-pip install streamlit pandas folium streamlit-folium ortools requests
+pip install streamlit pandas prophet plotly
 ```
 
-## 🚀 Rodando os Projetos
+## 🚀 Rodando o Projeto
 
-Os dois projetos rodam como aplicações **Streamlit** separadas e precisam ser executados em terminais diferentes.
+O projeto roda como uma aplicação **Streamlit**.
 
-### Projeto 1: Previsão de Compra
+### Previsão de Compra
 
 Este projeto analisa padrões de vendas por categoria usando série temporal.
 
@@ -78,55 +81,28 @@ streamlit run "Previsão de compra/app.py"
 
 A aplicação abrirá automaticamente em `http://localhost:8501`
 
-### Projeto 2: Roteirização
-
-Este projeto otimiza rotas de entrega em Recife usando algoritmos de roteamento.
-
-```bash
-streamlit run Roteirização/app.py
-```
-
-A aplicação abrirá automaticamente em `http://localhost:8501` (se for a primeira, ou em outra porta se a 8501 estiver em uso)
-
 ## 📦 Estrutura do Projeto
 
 ```
 Projeto/
 ├── requirements.txt              # Dependências do projeto
 ├── README.md                      # Este arquivo
-├── Previsão de compra/
-│   ├── app.py                     # App Streamlit de previsão
-│   └── dataset/
-│       ├── olist_customers_dataset.csv
-│       ├── olist_geolocation_dataset.csv
-│       ├── olist_order_items_dataset.csv
-│       ├── olist_order_payments_dataset.csv
-│       ├── olist_order_reviews_dataset.csv
-│       ├── olist_orders_dataset.csv
-│       ├── olist_products_dataset.csv
-│       ├── olist_sellers_dataset.csv
-│       └── product_category_name_translation.csv
-└── Roteirização/
-    └── app.py                     # App Streamlit de roteirização
+├── DOCUMENTACAO.md                # Documentação técnica e metodológica
+└── Previsão de compra/
+    ├── app.py                     # App Streamlit de previsão
+    └── dataset/
+        ├── olist_customers_dataset.csv
+        ├── olist_geolocation_dataset.csv
+        ├── olist_order_items_dataset.csv
+        ├── olist_order_payments_dataset.csv
+        ├── olist_order_reviews_dataset.csv
+        ├── olist_orders_dataset.csv
+        ├── olist_products_dataset.csv
+        ├── olist_sellers_dataset.csv
+        └── product_category_name_translation.csv
 ```
 
 ## 💡 Dicas Úteis
-
-### Executar Ambos os Projetos Simultaneamente
-
-Abra dois terminais separados:
-
-**Terminal 1:**
-```bash
-.\venv\Scripts\Activate.ps1
-streamlit run "Previsão de compra/app.py"
-```
-
-**Terminal 2:**
-```bash
-.\venv\Scripts\Activate.ps1
-streamlit run Roteirização/app.py
-```
 
 ### Desativar o Ambiente Virtual
 
@@ -162,10 +138,9 @@ pip freeze > requirements.txt
 ## 📝 Notas Adicionais
 
 - O projeto "Previsão de compra" utiliza dados da base OLIST e requer os arquivos CSV no diretório `dataset/`
-- O projeto "Roteirização" utiliza dados de agências bancárias reais em Recife e pode usar a API OSRM ou distância Haversine como fallback
-- Ambos os projetos usam **Streamlit** como framework para interface web interativa
+- O projeto usa **Streamlit** como framework para interface web interativa
 
 ## 📞 Suporte
 
 Para mais informações sobre Streamlit, visite: https://streamlit.io/
-Para OR-Tools: https://developers.google.com/optimization
+Para Prophet, visite: https://facebook.github.io/prophet/
